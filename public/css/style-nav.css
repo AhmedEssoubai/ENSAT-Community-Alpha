@@ -1,0 +1,56 @@
+.navbar {
+    box-shadow: 2px 2px 5px rgba(107, 107, 107, 0.4);
+    background: #fff;
+    /*
+    position: fixed;
+    width: 100%;*/
+    z-index: 1000;
+}
+
+.navbar .nav-item {
+    font-size: 1rem;
+    padding-right: 20px;
+}
+
+#searchButton {
+    display: none;
+}
+
+.list-group a {
+    color: rgba(100, 100, 100) !important;
+}
+
+.list-group a:hover {
+    color: rgba(150, 150, 150) !important;
+    text-decoration: none;
+}
+
+.list-group .active {
+    color: #e14a41 !important;
+    font-weight: bold;
+    background-color: transparent !important;
+}
+
+#dml_profil {
+    height: 40px;
+    width: 40px;
+}
+
+.avatare {
+    height: 48px;
+    width: 48px;
+}
+
+.com-avatare {
+    height: 64px;
+    width: 64px;
+}
+
+
+.groupe-icon {
+    width: 30px;
+}
+
+.dropdown-item:focus {
+    background-color: #e14a41;
+}

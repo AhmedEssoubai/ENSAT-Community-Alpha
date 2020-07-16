@@ -1,0 +1,209 @@
+.text-primary{
+    color: #e14a41 !important;
+}
+
+.btn-primary {
+    background-color: #e14a41 !important;
+    border-color: #e14a41 !important;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #e85950 !important;
+    border-color: #e85950 !important;
+    color: white;
+}
+
+.btn-os {
+    background-color: transparent !important;
+    border-color: rgba(114, 114, 114, 1) !important;
+    color: rgba(114, 114, 114, 1) !important;
+}
+
+.btn-os:hover {
+    background-color: transparent !important;
+    border-color: rgba(114, 114, 114, 0.5) !important;
+    color: rgba(114, 114, 114, 0.5) !important;
+}
+
+._link {
+    color: rgba(52, 152, 219, 1);
+}
+
+._link:hover {
+    color: rgba(52, 152, 219, 0.5);
+    text-decoration: none;
+}
+
+.btn-link {
+    color: rgba(52, 152, 219, 1);
+    background-color: transparent;
+    border: 0px;
+}
+
+.btn-link:hover {
+    color: rgba(52, 152, 219, 0.5);
+    text-decoration: none;
+}
+
+.btn-link:focus {
+    color: rgba(52, 152, 219, 0.5);
+    text-decoration: none;
+    outline: 0px;
+}
+
+.btn-link-na {
+    color: rgba(114, 114, 114, 1);
+    background-color: transparent;
+    border: 0px;
+}
+
+.btn-link-na:hover {
+    color: rgba(114, 114, 114, 1);
+    text-decoration: none;
+    cursor: default;
+}
+
+.btn-link-na:focus {
+    color: rgba(114, 114, 114, 1);
+    text-decoration: none;
+    outline: 0px;
+}
+
+._link-primary {
+    color: rgb(225, 74, 65);
+}
+
+._link-primary:hover {
+    color: rgba(225, 74, 65, 0.5);
+    text-decoration: none;
+}
+
+._sec_link {
+    color: rgba(135, 135, 135, 1);
+    font-size: 0.8em;
+}
+
+._sec_link:hover {
+    color: rgba(135, 135, 135, 0.5);
+    text-decoration: none;
+}
+
+.bg-gray {
+    background-color: rgba(247, 248, 250, 1);
+}
+
+.line {
+    height: 1px;
+    background-color: rgba(50, 50, 55, 0.3);
+    /*border-bottom: 1px solid rgba(50, 50, 55, 0.6)*/
+    box-shadow: 0 1px 5px rgba(50, 50, 55, 0.2);
+}
+
+.errorMessage {
+    color: rgb(236, 82, 82);
+}
+
+.hiddedElement {
+    position: fixed;
+    opacity: 0;
+}
+.icon {
+    color: rgba(100, 100, 100) !important;
+    font-size: 1.6em;
+}
+
+.icon:hover {
+    color: rgba(100, 100, 100, 0.5) !important;
+}
+
+.icon .active {
+    color: #e14a41 !important;
+}
+
+.icon .active:hover {
+    color: #ec6b63 !important;
+}
+
+.icon-mute {
+    cursor: pointer;
+    color: rgba(100, 100, 100, 0.5) !important;
+    font-size: 1.2em;
+}
+
+.icon-mute:hover {
+    color: rgba(100, 100, 100, 1) !important;
+}
+
+.icon-mute-2 {
+    cursor: pointer;
+    color: rgba(100, 100, 100, 0.3) !important;
+    font-size: 1.2em;
+}
+
+.icon-mute-2:hover {
+    color: rgba(100, 100, 100, 0.8) !important;
+}
+
+.icon-g{
+    cursor: pointer;
+    color: rgba(74, 217, 145, 0.5) !important;
+    font-size: 1.2em;
+}
+.icon-g:hover{
+    color: rgba(74, 217, 145, 1) !important;
+}
+.icon-r{
+    cursor: pointer;
+    color: rgba(255, 101, 101, 0.5) !important;
+    font-size: 1.2em;
+}
+.icon-r:hover{
+    color: rgba(255, 101, 101, 1) !important;
+}
+.btn-od{
+    color: rgba(255, 101, 101, 1) !important;
+    border: 1px solid rgba(255, 101, 101, 1) !important;
+}
+.btn-od:hover{
+    color: white !important;
+    background-color: rgba(255, 101, 101, 1) !important;
+}
+
+/*
+    Side menu
+*/
+
+#side_menu_container{
+    max-width: 100%;
+}
+
+#side_menu{
+    height: 100vh;
+    background-color: #222629;
+    display: none;
+    width: 0px;
+}
+
+#side_menu_content{
+    display: none;
+}
+
+#avatare{
+    width: 125px;
+    height: 125px;
+}
+
+.side-menu-title{
+    background-color: rgba(255, 255, 255, 0.05);
+    /*border: rgba(255, 255, 255, 0.1) solid 1px;*/
+}
+
+#content{
+    max-width: 950px !important;
+}
+
+.div_link:hover{
+    color: rgba(52, 152, 219);
+    cursor: pointer;
+}
