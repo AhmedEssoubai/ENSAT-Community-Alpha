@@ -19,7 +19,7 @@
                             <button id="btn-prf" type="button" onclick="account_type(1)">Professor</button>
                         </h4>
 
-                        <input type="hidden" name="atype" value="{{ old('atype', '0') }}" />
+                        <input id="atype" type="hidden" name="atype" value="{{ old('atype', '0') }}" />
                         <div id="std-inputs">
                             <div class="form-group my-3">
                                 <label for="class">Class :</label>
@@ -34,28 +34,18 @@
                                     <option @if(old('class') == 'MPSI2') selected @endif value="MPSI2">MPSI2</option>
                                 </select>
                             </div>
-                            <div class="form-groupe my-3">
-                                <label class="control-label" for="std-id">Student id : </label>
-                                <input id="std-id" name="std-id" type="text" class="form-control @error('std-id') is-invalid @enderror" placeholder="Entrez votre id" value="{{ old('std-id') }}" required autocomplete="std-id" />
-    
-                                @error('std-id')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
                         </div>
                         <div id="prf-inputs">
-                            <div class="form-groupe my-3">
-                                <label class="control-label" for="prf-id">Professor id : </label>
-                                <input id="prf-id" name="prf-id" type="text" class="form-control @error('prf-id') is-invalid @enderror" placeholder="Entrez votre id" value="{{ old('prf-id') }}" required autocomplete="prf-id" />
+                        </div>
+                        <div class="form-groupe my-3">
+                            <label class="control-label" for="cin">CIN : </label>
+                            <input id="cin" name="cin" type="text" class="form-control @error('cin') is-invalid @enderror" placeholder="Entrez votre CIN" value="{{ old('cin') }}" required autocomplete="cin" />
 
-                                @error('prf-id')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
+                            @error('cin')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                         <div class="form-groupe my-3">
                             <label class="control-label" for="lastname">Last name : </label>
@@ -125,11 +115,10 @@
 <script type="text/javascript">
     var type = 0;
 
-    account_type(document.getElementsByName("atype").value);
-
     function account_type(t)
     {
         type = t;
+        document.getElementById("atype").value = t;
         if (type === 1)
         {
             document.getElementById("prf-inputs").classList.remove("d-none");
@@ -138,8 +127,6 @@
             document.getElementById("btn-std").classList.remove("btn-link-na");
             document.getElementById("btn-std").classList.add("btn-link");
             document.getElementById("btn-prf").classList.add("btn-link-na");
-            document.getElementById("std-id").required = false;
-            document.getElementById("prf-id").required = true;
         }
         else
         {
@@ -149,10 +136,10 @@
             document.getElementById("btn-prf").classList.remove("btn-link-na");
             document.getElementById("btn-prf").classList.add("btn-link");
             document.getElementById("btn-std").classList.add("btn-link-na");
-            document.getElementById("std-id").required = true;
-            document.getElementById("prf-id").required = false;
         }
 
     }
+
+    account_type(document.getElementById("atype").value);
 </script>
 @endsection

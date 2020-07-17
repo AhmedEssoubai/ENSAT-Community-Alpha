@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Professor;
 use App\Providers\RouteServiceProvider;
+use App\Student;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
@@ -53,7 +55,8 @@ class RegisterController extends Controller
             'firstname' => ['required', 'string', 'max:20'],
             'lastname' => ['required', 'string', 'max:20'],
             'email' => ['required', 'string', 'email', 'max:50', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed']
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'cin' => ['required', 'string', 'max:10', 'unique:users'],
         ]);
     }
 
@@ -65,12 +68,27 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
+            'cin' => $data['cin'],
             'firstname' => $data['firstname'],
             'lastname' => $data['lastname'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'image' => '/img/default.jpg'
         ]);
+        if ($data['atype'] == 0)
+            $user->profile = Student::create([
+                //'class_id' => $data['class'],
+                'user_id' => $user->id
+            ]);
+        else
+        {
+            $user->profile = Professor::create([
+                'user_id' => $user->id
+            ]);
+            $user->professor = true;
+        }
+            
+        return $user;
     }
 }

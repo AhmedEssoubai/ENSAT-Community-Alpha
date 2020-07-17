@@ -36,10 +36,15 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light fixed-top">
             <div class="container d-flex">
-                <h5 class="mr-3"><a class="icon-mute" role="button" onclick="openNav()"><i class="fa fa-bars"></i></a></h5>
-                <a href="#" class="navbar-brand d-flex">
+                @auth
+                    <h5 class="mr-3"><a class="icon-mute" role="button" onclick="openNav()"><i class="fa fa-bars"></i></a></h5>
+                @endauth
+                <!--<a href="#" class="navbar-brand d-flex">
                     <h4 class="text-primary">ENSAT</h4>
                     <span class="mx-2">Community</span>
+                </a>-->
+                <a href="#" class="navbar-brand d-flex">
+                    <h4 class="text-primary">BISD</h4>
                 </a>
 
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -62,19 +67,23 @@
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Administration</a>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="{{ route('admin.users.pending') }}">Users</a>
-                                    <a class="dropdown-item" href="{{ route('admin.groupes.all') }}">Classes</a>
+                                    <a class="dropdown-item" href="#">Users</a>
+                                    <a class="dropdown-item" href="#">Classes</a>
                                 </div>
                             </li>
                             <li class="nav-item dropdown">
-                                <img src="img/avatar-0.png" id="dml_profil" class="img-fluid rounded-circle dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
+                                <img src="{{ Auth::user()->image }}" id="dml_profil" class="img-fluid rounded-circle dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dml_profil">
                                     <a class="dropdown-item" href="#">Bookmark</a>
                                     <a class="dropdown-item" href="#">Setting</a>
-                                    <a class="dropdown-item" href="#" onclick="event.preventDefault();
+                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                         document.getElementById('logout-form').submit();">
                                         Se déconnecter
                                     </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
                                 </div>
                             </li>
                         @endguest
@@ -84,28 +93,30 @@
         </nav>
 
         <main class="py-4 bg-light">
-            <div id="side_menu_container" class="fixed-top px-0">
-                <div id="side_menu" class="pt-3 pb-3 shadow text-center text-white px-0">
-                    <div id="side_menu_content">
-                        <h6 class="text-right mx-5"><a class="icon-mute" role="button" onclick="closeNav()"><i class="fa fa-times"></i></a></h6>
-                        <div class="mt-3 py-3 side-menu-title">
-                            <h3>Courses</h3>
-                        </div>
-                        <div class="m-4 text-left">
-                            <h5 class="mt-4 d-flex justify-content-between">
-                                Java
-                            </h5>
-                            <h5 class="mt-4 d-flex justify-content-between">
-                                Cloud Computing
-                            </h5>
-                            <h5 class="mt-4 d-flex justify-content-between">
-                                Python
-                                <span class="badge badge-pill badge-danger">10</span>
-                            </h5>
+            @auth
+                <div id="side_menu_container" class="fixed-top px-0">
+                    <div id="side_menu" class="pt-3 pb-3 shadow text-center text-white px-0">
+                        <div id="side_menu_content">
+                            <h6 class="text-right mx-5"><a class="icon-mute" role="button" onclick="closeNav()"><i class="fa fa-times"></i></a></h6>
+                            <div class="mt-3 py-3 side-menu-title">
+                                <h3>Courses</h3>
+                            </div>
+                            <div class="m-4 text-left">
+                                <h5 class="mt-4 d-flex justify-content-between">
+                                    Java
+                                </h5>
+                                <h5 class="mt-4 d-flex justify-content-between">
+                                    Cloud Computing
+                                </h5>
+                                <h5 class="mt-4 d-flex justify-content-between">
+                                    Python
+                                    <span class="badge badge-pill badge-danger">10</span>
+                                </h5>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            @endauth
             @yield('content')
         </main>
 
@@ -113,11 +124,11 @@
             <div class="border-top"></div>
             <div class="container">
                 <div class="row my-3">
-                    <img src="img/logo.png" class="img-fluid mr-3" width="160px" />
+                    <img src="{{ asset("img/logo.png")}}" class="img-fluid mr-3" width="160px" />
                     <span class="lead mr-auto my-auto">
                         Copyright © 2020
                     </span>
-                    <img src="img/ensa-tanger.png" class="img-fluid" width="80px" />
+                    <img src="{{ asset("img/ensa-tanger.png")}}" class="img-fluid" width="80px" />
                 </div>
             </div>
             <div class="bar"></div>

@@ -24,3 +24,10 @@ Route::get('/home', 'HomeController@index')->name('home');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+// Classes
+Route::get('/classes', 'ClassController@index')->name('classes.index');
+Route::get('/classes/create', 'ClassController@create')->name('classes.create');
+Route::post('/classes', 'ClassController@store')->name('classes');
+// Community
+Route::get('/classes/{class}/community', 'CommunityController@show')->name('classes.community');

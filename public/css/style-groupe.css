@@ -38,10 +38,10 @@
 .nav-fill .active:hover{
     color: #0069bb !important;
 }
-#groupe-nav .nav-item{
+#class-nav .nav-item{
     border-left: 1px solid rgba(100, 100, 100, 0.2) !important;
     font-size: 0.7em;
 }
-#groupe-nav .active{
+#class-nav .active{
     background-color: #f8f9fa !important;
 }
