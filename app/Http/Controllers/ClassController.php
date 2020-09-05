@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Classe;
+use App\Professor;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -25,7 +27,7 @@ class ClassController extends Controller
      */
     public function index()
     {
-        return view('class.index', ['classes' => Classe::get()]);
+        return view('class.index', ['classes' => Classe::get(), 'professors' => Professor::get()]);
     }
 
     /**
@@ -45,7 +47,7 @@ class ClassController extends Controller
             'chef_id' => $data['chef'],
             'image' => '/img/class-cover.jpg'
         ]);
-        return redirect()->route('community.show', ['class' => $c->id]);
+        return redirect()->route('classes.discussions.index', ['class' => $c->id]);
     }
 
     /**
@@ -66,5 +68,26 @@ class ClassController extends Controller
     public function create()
     {
         return view('class.create');
+    }
+
+    /**
+     * Show a class members (Professors and Student's)
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function members($class)
+    {
+        return view('class.members', ['class' => Classe::with(['chef', 'professors.user'])->findOrFail($class), 'tab_index' => 1]);
+    }
+
+    /**
+     * Create a new group instance after a valid registration.
+     *
+     * @param  array  $data
+     * @return \App\Groupe
+     */
+    public function add_professors()
+    {
+        return response("Hi", 200);
     }
 }

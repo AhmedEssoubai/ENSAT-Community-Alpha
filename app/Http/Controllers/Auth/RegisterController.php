@@ -44,6 +44,16 @@ class RegisterController extends Controller
     }
 
     /**
+     * Show all professors
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function index()
+    {
+        return response()->json(['values' => 'Hi']);
+    }
+
+    /**
      * Get a validator for an incoming registration request.
      *
      * @param  array  $data
@@ -57,6 +67,7 @@ class RegisterController extends Controller
             'email' => ['required', 'string', 'email', 'max:50', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'cin' => ['required', 'string', 'max:10', 'unique:users'],
+            'class' => []
         ]);
     }
 
@@ -74,21 +85,21 @@ class RegisterController extends Controller
             'lastname' => $data['lastname'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'image' => '/img/default.jpg'
+            'image' => '/img/default.png'
         ]);
         if ($data['atype'] == 0)
-            $user->profile = Student::create([
-                //'class_id' => $data['class'],
+            $user->profile()->associate(Student::create([
+                'class_id' => $data['class'],
                 'user_id' => $user->id
-            ]);
+            ]));
         else
         {
-            $user->profile = Professor::create([
+            $user->profile()->associate(Professor::create([
                 'user_id' => $user->id
-            ]);
-            $user->professor = true;
+            ]));
         }
-            
+        $user->save();
+        
         return $user;
     }
 }

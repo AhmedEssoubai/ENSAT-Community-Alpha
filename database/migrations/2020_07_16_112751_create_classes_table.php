@@ -16,7 +16,7 @@ class CreateClassesTable extends Migration
         Schema::create('classes', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('chef_id');
-            $table->string('label');
+            $table->string('label', 100);
             $table->string('image');
             $table->timestamps();
             $table->foreign('chef_id')->references('id')->on('professors');

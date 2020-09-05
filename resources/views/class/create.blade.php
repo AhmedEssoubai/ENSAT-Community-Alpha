@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<section class="py-5 text-left bg-light" id="newGroupe">
+<section class="pt-3 pb-5 text-left bg-light page-spacing" id="newGroupe">
     <div class="container">
         <div class="row">
             <div class="col-md-5 p-5 my-3 bg-white shadow">

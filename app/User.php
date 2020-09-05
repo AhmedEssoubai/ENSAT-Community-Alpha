@@ -10,16 +10,13 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-    public $profile = null;
-    public $professor = false;
-
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'firstname', 'lastname', 'email', 'password', 'image', 'status', 'cin'
+        'firstname', 'lastname', 'email', 'password', 'image', 'status', 'cin', 'profile_id', 'profile_type'
     ];
 
     /**
@@ -42,6 +39,23 @@ class User extends Authenticatable
 
     public function is_professor()
     {
-        return $this->professor;
+        return true;
+    }
+
+    /**
+     * The user discussions
+     * 
+     */
+    public function discussions()
+    {
+        return $this->hasMany(Discussion::class, 'user_id', 'id');
+    }
+
+    /**
+    *   The user's profile
+    */
+    public function profile()
+    {
+        return $this->morphTo();
     }
 }

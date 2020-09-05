@@ -21,8 +21,36 @@ class Student extends Model
     /**
      * The user account of the student
      */
-    public function user()
+    /*public function user()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
+    }*/
+    public function user()
+    {
+        return $this->morphOne('App\User', 'profile');
+    }
+
+    /**
+     * Student groups
+     */
+    public function groups()
+    {
+        return $this->belongsToMany(Group::class);
+    }
+
+    /**
+     * Student have many assignments
+     */
+    public function assignments()
+    {
+        return $this->morphToMany('App\Assignment', 'assigned')->orderBy('id', 'DESC');
+    }
+
+    /**
+     * Student assignment submissions
+     */
+    public function submissions()
+    {
+        return $this->morphMany('App\Submission', 'submissions', 'submitter_type', 'submitter_id', 'id');
     }
 }

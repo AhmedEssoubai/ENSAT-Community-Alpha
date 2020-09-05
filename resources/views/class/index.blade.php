@@ -1,29 +1,59 @@
 @extends('layouts.app')
 
 @section('content')
-<section class="py-5 text-left">
+<section class="pt-3 pb-5 text-left page-spacing bg-light">
     <div class="container pt-3">
-        <div class="row mt-2 mb-3 border-bottom pb-3 d-flex justify-content-between">
-            <h2 class="text-muted">My classes ({{ $classes->count() }})</h2>
-            <h5 class="align-self-end"><a class="btn btn-primary" href="{{ route('classes.create') }}">New class  <i class="ml-2 fas fa-plus"></i></a></h5>
+        <div class="row mx-3 mt-2 mb-3 pb-3 d-flex justify-content-between">
+            <div>
+                <h3 class="text-black">My classes</h3>
+                <p class="text-muted">
+                    You have {{ $classes->count() }} class
+                </p>
+            </div>
+            <h6 class="">
+                <button class="rb-primary rbl" data-toggle="modal" data-target="#new_class" onclick="selectLoad('select_chef', '/professors', '-')">new class</button>
+            </h6>
         </div>
         <div class="row mb-5">
             @foreach ($classes as $class)
-            <div class="col-sm-6 col-md-4 col-lg-3 my-3">
-                <div class="card shadow-sm">
-                    <div class="card-img-top img_box"><a href="/classes/{{ $class->id }}"><img class="img_self" src="{{ $class->image }}" alt="class image"></a></div>
-                    <div class="card-body d-flex">
-                        <div class="flex-grow-1">
-                            <h5 class="card-title">
-                                <a class="_link" href="/classes/{{ $class->id }}">{{ $class->label }}</a>
-                                <span title="Privé" class="ml-2 text-muted align-self-center" style="font-size: 0.7em"><i class="fas fa-lock"></i></span>
-                            </h5>
-                            <h6 class="card-subtitle mb-2 text-muted">10 members</h6>
+            <div class="col-sm-6 col-md-4 col-lg-4 my-3">
+                <div class="class-card card">
+                    <div class="card-img-top img_box"><a href="/classes/{{ $class->id }}/discussions"><img class="img_self" src="{{ $class->image }}" alt="class image"></a></div>
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <a class="link-dark" href="/classes/{{ $class->id }}/discussions">{{ $class->label }}</a>
+                        </h5>
+                        <div class="content-hidden my-3 d-flex text-lgray">
+                            <div class="mr-4" title="Students">
+                                <span class="content-hidden-item align-items-center"><i class="fas fa-user-graduate mr-1"></i> 10</span>
+                            </div>
+                            <div class="mr-4" title="Documents">
+                                <span class="content-hidden-item align-items-center"><i class="fas fa-book mr-1"></i> 10</span>
+                            </div>
+                            <div class="mr-4" title="Assignments">
+                                <span class="content-hidden-item align-items-center"><i class="fas fa-file-alt mr-1"></i> 10</span>
+                            </div>
                         </div>
-                        <div class="d-flex pr-2 dropdown align-self-center">
-                            <span class="icon-mute" id="class_{{ $class->id }}_options" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></span>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="class_{{ $class->id }}_options">
-                                <a class="dropdown-item" href="#">Administrateur</a>
+                        <div class="d-flex">
+                            <div class="flex-grow-1 d-flex">
+                                <div class="avatar-30 mr-2">
+                                    <img class="img-fluid rounded-circle" src="/img/avatar-0.png" alt="class image">
+                                </div>
+                                <div class="avatar-30 mr-2">
+                                    <img class="img-fluid rounded-circle" src="/img/avatar-2.jpg" alt="class image">
+                                </div>
+                                <div class="avatar-30 mr-2">
+                                    <img class="img-fluid rounded-circle" src="/img/avatar-2.jpg" alt="class image">
+                                </div>
+                                <div class="rounded-box">
+                                    +4
+                                </div>
+                            </div>
+                            <div class="d-flex pr-2 dropdown align-self-center">
+                                <small class="icon-hidden" id="class_{{ $class->id }}_options" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></small>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="class_{{ $class->id }}_options">
+                                    <a class="dropdown-item" href="#">Administrateur</a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -39,5 +69,60 @@
             @endif
         </div>
     </div>
+    <div class="modal fade rkm-model" id="new_class" tabindex="-1" role="dialog" aria-labelledby="dp-modalLabel" aria-hidden="true">
+        <div class="modal-dialog rkm-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header border-0 right-corner">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <section class="modal-body">
+                    <div class="container h-100">
+                        <div class="row justify-content-md-center h-100 align-items-center">
+                            <form class="col-sm-12 col-md-8 col-lg-6" method="POST" action="{{ route('classes') }}">
+                                @csrf
+                                <h2 class="mb-5 text-center">
+                                    New class
+                                </h2>
+                                <div class="form-groupe mt-2 mb-4">
+                                    <div>
+                                        <input id="label" name="label" type="text" class="rkm-form-control @error('label') is-invalid @enderror" placeholder="Enter a label" required autocomplete="nom" autofocus>
+                                        @error('label')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="form-group my-4">
+                                    <select id="chef" name="chef" class="custom-select rkm-form-control @error('chef') is-invalid @enderror" required>
+                                        <option disabled selected value>-- Select class chef --</option>
+                                        @foreach ($professors as $professor)
+                                            <option @if(old('chef') == '{{$professor->id}}') selected @endif value="{{$professor->id}}">{{$professor->user->firstname}} {{$professor->user->lastname}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                {{--<div id="select_chef" class="form-group filter-select my-4 @error('chef') is-invalid @enderror">
+                                    <input type="text" name="chef" required hidden>
+                                    <div class="selected-options">
+                                        <input class="free flex-grow-1 search-input" maxlength="45" onfocus="selectStartSearch('select_chef')" onfocusout="selectEndSearch('select_chef')" onkeyup="selectSearch(event, 'select_chef')"/>
+                                    </div>
+                                    <div class="options-list"></div>
+                                </div>--}}
+                                <div class="form-groupe mt-5">
+                                    <button type="submit" class="rb-primary rbl w-100">Create</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
 </section>
 @endsection
+
+@push('scripts')
+    <script src="{{ asset('js/select-scripts.js') }}"></script>
+@endpush

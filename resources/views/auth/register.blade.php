@@ -24,14 +24,14 @@
                             <div class="form-group my-3">
                                 <label for="class">Class :</label>
                                 <select id="class" name="class" class="form-control @error('class') is-invalid @enderror">
-                                    <option @if(old('class') == 'MBISD1') selected @endif value="MBISD1">MBISD1</option>
-                                    <option @if(old('class') == 'MBISD2') selected @endif value="MBISD2">MBISD2</option>
-                                    <option @if(old('class') == 'MSCEE1') selected @endif value="MSCEE1">MSCEE1</option>
-                                    <option @if(old('class') == 'MSCEE2') selected @endif value="MSCEE2">MSCEE2</option>
-                                    <option @if(old('class') == 'MCSC1') selected @endif value="MCSC1">MCSC1</option>
-                                    <option @if(old('class') == 'MCSC2') selected @endif value="MCSC2">MCSC2</option>
-                                    <option @if(old('class') == 'MPSI1') selected @endif value="MPSI1">MPSI1</option>
-                                    <option @if(old('class') == 'MPSI2') selected @endif value="MPSI2">MPSI2</option>
+                                    <option @if(old('class') == '1') selected @endif value="1">MBISD1</option>
+                                    <option @if(old('class') == '2') selected @endif value="2">MBISD2</option>
+                                    <option @if(old('class') == '3') selected @endif value="3">MSCEE1</option>
+                                    <option @if(old('class') == '4') selected @endif value="4">MSCEE2</option>
+                                    <option @if(old('class') == '5') selected @endif value="5">MCSC1</option>
+                                    <option @if(old('class') == '6') selected @endif value="6">MCSC2</option>
+                                    <option @if(old('class') == '7') selected @endif value="7">MPSI1</option>
+                                    <option @if(old('class') == '8') selected @endif value="8">MPSI2</option>
                                 </select>
                             </div>
                         </div>
