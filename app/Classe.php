@@ -81,4 +81,12 @@ class Classe extends Model
     {
         return $this->courses->where('professor_id', $professor);
     }
+
+    /**
+     * Is a professor given the chef of the class
+     */
+    public function is_chef($professor_id)
+    {
+        return $this->chef_id == $professor_id;
+    }
 }

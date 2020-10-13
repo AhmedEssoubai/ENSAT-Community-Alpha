@@ -38,7 +38,7 @@
                                 <div class="d-flex ml-2 align-items-center dropdown">
                                     <small class="text-mgray icon-hidden" id="discussion_{{ $discussion->id }}_options" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-ellipsis-h"></i></small>
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="discussion_{{ $discussion->id }}_options">
-                                        <a class="dropdown-item" href="/discussions/{{ $discussion->id }}/editer">Edit</a>
+                                        {{--<a class="dropdown-item" href="/discussions/{{ $discussion->id }}/editer">Edit</a>--}}
                                         <button type="button" class="dropdown-item" data-toggle="modal" data-target="#delete_discussion" data-id="{{ $discussion->id }}">Delete</a>
                                     </div>
                                 </div>
@@ -62,8 +62,8 @@
                 @if ($class->discussions->count() == 0)
                     <div class="text-muted text-center py-5 px-2">
                         <h2 class="my-3" style="font-size: 3em"><i class="fas fa-cloud-showers-heavy"></i></h2>
-                        <h4 class="my-3">Ce class est mort</h4>
-                        <h5 class="my-3">Apportez-lui la vie par vos posts</h5>
+                        <h4 class="my-3">No discussions found</h4>
+                        <h5 class="my-3">If you have any questions post them here</h5>
                     </div>
                 @endif
             </div>
@@ -108,22 +108,15 @@
                 <h6 class="text-dark mx-3 mb-3">Class students</h6>
                 <div class="container">
                     <div class="row mx-1">
-                        <div class="col-2 my-1 px-1" title="Consectetur Adipisicing">
-                            <img src="img/avatar-0.png" class="img-fluid rounded-circle"/>
-                        </div>
-                        <div class="col-2 my-1 px-1" title="Possimus Cupiditate">
-                            <img src="img/avatar-1.jpeg" class="img-fluid rounded-circle"/>
-                        </div>
-                        <div class="col-2 my-1 px-1" title="Dolor Sit">
-                            <img src="img/avatar-2.jpg" class="img-fluid rounded-circle"/>
-                        </div>
-                        <div class="col-2 my-1 px-1" title="Dolor Sit">
-                            <img src="img/avatar-2.jpg" class="img-fluid rounded-circle"/>
-                        </div>
+                        @foreach ($class->students as $student)
+                            <div class="col-2 my-1 px-1">
+                                <img class="img-fluid rounded-circle" src="{{ $student->user->image }}" alt="student_img" title="{{ $student->user->firstname }} {{ $student->user->lastname }}">
+                            </div>
+                        @endforeach
                     </div>
                 </div>
                 <div class="text-center mt-3">
-                    <a href="#" class="_link px-3"><small>Show all</small></a>
+                    <a href="/classes/{{ $class->id }}/members" class="_link px-3"><small>Show all</small></a>
                 </div>
             </div>
         </div>
@@ -160,9 +153,10 @@
                             <div class="row justify-content-md-center h-100 align-items-center">
                                 <form class="col-sm-12 col-md-8 col-lg-6" method="POST" enctype="multipart/form-data" action="{{ route('discussions') }}">
                                     @csrf
-                                    <h2 class="mb-5 text-center">New discussion</h2>
+                                    <h2 class="mb-5 text-center text-black">New discussion</h2>
                                     <div class="form-group my-3">
-                                        <input type="text" name="title" maxlength="125" class="rkm-form-control my-2 @error('title') is-invalid @enderror" value="{{ old('title') }}" placeholder="Title" required />
+                                        <label for="title" class="rkm-control-label">Title</label>
+                                        <input type="text" name="title" maxlength="125" class="rkm-form-control @error('title') is-invalid @enderror" value="{{ old('title') }}" placeholder="Enter Title" required />
                                         @error('title')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -170,7 +164,8 @@
                                         @enderror
                                     </div>
                                     <div class="form-group my-3">
-                                        <textarea id="content" class="rkm-form-control my-2 @error('content') is-invalid @enderror" name="content" rows="4" placeholder="Content" required>{{ old('content') }}</textarea>
+                                        <label for="content" class="rkm-control-label">Content</label>
+                                        <textarea id="content" class="rkm-form-control @error('content') is-invalid @enderror" name="content" rows="4" placeholder="Enter Content" required>{{ old('content') }}</textarea>
                                         @error('content')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -180,7 +175,8 @@
                                     <div class="form-group my-3">
                                         <div class="form-row">
                                             <div class="col">
-                                                <div class="custom-file my-2 @error('image') is-invalid @enderror">
+                                                <label class="rkm-control-label">Image</label>
+                                                <div class="custom-file @error('image') is-invalid @enderror">
                                                     <input id="discussionImage" type="file" name="image" class="custom-file-input @error('image') is-invalid @enderror" value="{{ old('image') }}">
                                                     <label class="custom-file-label" for="discussionImage">Choose image</label>
                                                 </div>
@@ -191,7 +187,8 @@
                                                 @enderror
                                             </div>
                                             <div class="col-4">
-                                                <select id="cours" name="cours" class="custom-select rkm-form-control my-2">
+                                                <label for="course" class="rkm-control-label">Course</label>
+                                                <select id="course" name="cours" class="custom-select rkm-form-control">
                                                     <option selected value="0">General</option>
                                                     <option value="1">Python</option>
                                                     <option value="2">Cloud</option>

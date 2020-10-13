@@ -38,8 +38,8 @@
                                 <div class="d-flex align-items-center dropdown">
                                     <span class="text-mgray icon-hidden" id="resource_{{ $resource->id }}_options" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-ellipsis-h"></i></span>
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="resource_{{ $resource->id }}_options">
-                                        <a class="dropdown-item" href="#">Éditer</a>
-                                        <button type="button" class="dropdown-item" data-toggle="modal" data-target="#delete_post" data-id="{{ $resource->id }}">Supprimer</a>
+                                        {{--<a class="dropdown-item" href="#">Edit</a>--}}
+                                        <button type="button" class="dropdown-item" data-toggle="modal" data-target="#delete_resource" data-id="{{ $resource->id }}">Delete</a>
                                     </div>
                                 </div>
                             </div>
@@ -61,7 +61,7 @@
                 <button class="rb-primary rbl w-100" data-toggle="modal" data-target="#new_discussion">new resource</button>
             </div>
             {{-- Assignments list --}}
-            <div class="py-3 mb-4 border-rounded">
+            {{--<div class="py-3 mb-4 border-rounded">
                 <h6 class="text-dark mx-3 mb-3">This week assignments</h6>
                 <div class="rkm-list-group">
                     <a href="#" class="list-group-item d-flex align-items-center border-0">
@@ -74,9 +74,9 @@
                 <div class="text-center mt-3">
                     <a href="#" class="_link px-3"><small>Show all</small></a>
                 </div>
-            </div>
+            </div>--}}
             {{-- Annoucments list --}}
-            <div class="py-3 mb-4 border-rounded">
+            {{--<div class="py-3 mb-4 border-rounded">
                 <h6 class="text-dark mx-3 mb-3">This week annoucments</h6>
                 <div class="rkm-list-group">
                     <a href="#" class="list-group-item d-flex align-items-center border-0">
@@ -89,49 +89,42 @@
                 <div class="text-center mt-3">
                     <a href="#" class="_link px-3"><small>Show all</small></a>
                 </div>
-            </div>
+            </div>--}}
             {{-- Students list --}}
             <div class="py-3 mb-4 border-rounded">
                 <h6 class="text-dark mx-3 mb-3">Class students</h6>
                 <div class="container">
                     <div class="row mx-1">
-                        <div class="col-2 my-1 px-1" title="Consectetur Adipisicing">
-                            <img src="img/avatar-0.png" class="img-fluid rounded-circle"/>
-                        </div>
-                        <div class="col-2 my-1 px-1" title="Possimus Cupiditate">
-                            <img src="img/avatar-1.jpeg" class="img-fluid rounded-circle"/>
-                        </div>
-                        <div class="col-2 my-1 px-1" title="Dolor Sit">
-                            <img src="img/avatar-2.jpg" class="img-fluid rounded-circle"/>
-                        </div>
-                        <div class="col-2 my-1 px-1" title="Dolor Sit">
-                            <img src="img/avatar-2.jpg" class="img-fluid rounded-circle"/>
-                        </div>
+                        @foreach ($class->students as $student)
+                            <div class="col-2 my-1 px-1">
+                                <img class="img-fluid rounded-circle" src="{{ $student->user->image }}" alt="student_img" title="{{ $student->user->firstname }} {{ $student->user->lastname }}">
+                            </div>
+                        @endforeach
                     </div>
                 </div>
                 <div class="text-center mt-3">
-                    <a href="#" class="_link px-3"><small>Show all</small></a>
+                    <a href="/classes/{{ $class->id }}/members" class="_link px-3"><small>Show all</small></a>
                 </div>
             </div>
         </div>
-        <div class="modal fade" id="delete_discussion" tabindex="-1" role="dialog" aria-labelledby="dp-modalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                    <input id="d-post-id" type="hidden" />
-                    <h5 class="modal-title" id="dp-modalLabel">Supprimer le discussion</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+        <div class="modal fade rkm-model" id="delete_resource" tabindex="-1" role="dialog" aria-labelledby="dp-modalLabel" aria-hidden="true">
+            <div class="modal-dialog rkm-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="modal-header border-0 right-corner">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <span class="lead">Are you sure of you wanna delete this resource?</span>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="deletePost()">Delete</button>
+                    </div>
                 </div>
-                <div class="modal-body">
-                    are you sure of this
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="deletePost()">Delete</button>
-                </div>
-              </div>
             </div>
         </div>
         <div class="modal fade rkm-model" id="new_discussion" tabindex="-1" role="dialog" aria-labelledby="dp-modalLabel" aria-hidden="true">
@@ -152,7 +145,8 @@
                                         <button type="submit" class="rb-primary rbl">Publish</button>
                                     </div>
                                     <div class="form-group my-3">
-                                        <input type="text" name="title" maxlength="125" class="rkm-form-control my-2 @error('title') is-invalid @enderror" value="{{ old('title') }}" placeholder="Title" required />
+                                        <label for="title" class="rkm-control-label">Title</label>
+                                        <input id="title" type="text" name="title" maxlength="125" class="rkm-form-control @error('title') is-invalid @enderror" value="{{ old('title') }}" placeholder="Enter Title" required />
                                         @error('title')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -160,7 +154,8 @@
                                         @enderror
                                     </div>
                                     <div class="form-group my-3">
-                                        <textarea class="rkm-form-control my-2 @error('content') is-invalid @enderror" name="content" rows="4" placeholder="Content" required>{{ old('content') }}</textarea>
+                                        <label for="content" class="rkm-control-label">Content</label>
+                                        <textarea id="content" class="rkm-form-control @error('content') is-invalid @enderror" name="content" rows="4" placeholder="Enter Content" required>{{ old('content') }}</textarea>
                                         @error('content')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -168,6 +163,7 @@
                                         @enderror
                                     </div>
                                     <div class="form-group my-3">
+                                        <label for="course" class="rkm-control-label">Course</label>
                                         <select id="course" name="course" class="custom-select rkm-form-control @error('course') is-invalid @enderror" required>
                                             <option disabled @empty(old('course')) selected @endif value>-- Select resource course --</option>
                                             @foreach ($prof_courses as $course)

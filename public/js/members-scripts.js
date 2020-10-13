@@ -23,7 +23,7 @@ $(document).ready(function(){
                         if (!selected.includes(ids[x]))
                         {
                             list_ui.append(
-                                '<button type="button" id="professor_" class="free-list item-full row" onclick="addItem(' + x + ')">' +
+                                '<button type="button" id="professor_' + ids[x] + '" class="free-list item-full row" onclick="addItem(' + x + ')">' +
                                     '<div class="d-flex p-3 align-items-center">' +
                                         '<div class="pr-3">' +
                                             '<img src="' + imgs[x] + '" class="img-fluid rounded-circle" width="48px"/>' +
@@ -46,7 +46,7 @@ $(document).ready(function(){
         }
         document.getElementById("empty_list").classList.add("d-none");
     });
-    $('#send_members').on('click', function () {
+    /*$('#send_members').on('click', function () {
         $.ajax({
             type: "POST",
             url: "/members",
@@ -56,7 +56,7 @@ $(document).ready(function(){
             }
         });
         alert("Sent");
-    });
+    });*/
 });
 
 function removeItem(id){

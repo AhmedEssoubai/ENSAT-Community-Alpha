@@ -10,9 +10,11 @@
                     You have {{ $class->courses->count() }} course
                 </p>
             </div>
-            <h6 class="">
+            @if (Auth::user()->is_professor())
+            <h6>
                 <button class="rb-primary rbl" data-toggle="modal" data-target="#new_cours">NEW Course</button>
             </h6>
+            @endif
         </div>
         <div class="row mb-5">
             @foreach ($class->courses as $cours)
@@ -36,42 +38,64 @@
             @if ($class->courses->count() == 0)
                 <div class="col text-muted text-center py-2 px-2 my-3">
                     <h2 class="my-3" style="font-size: 3em"><i class="fas fa-box-open"></i></h2>
-                    <h4 class="my-3">Aucun cour à afficher</h4>
-                    <h5 class="my-3">Cliquez sur "<i class="fas fa-plus"></i>" pour créer votre premier cour</h5>
+                    <h4 class="my-3">No course to display</h4>
                 </div>
             @endif
         </div>
     </div>
-    <div class="modal fade" id="new_cours" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalTitle">New cours</h5>
-            </div>
-            <div class="modal-body">
-                <form method="POST" id="new_cours_form" enctype="multipart/form-data" action="{{ route('classes.courses.store') }}">
-                    @csrf
-                    <div class="form-group">
-                        <label for="title" class="col-form-label">Title:</label>
-                        <input type="text" name="title" class="form-control" id="title" maxlength="125">
+    @if (Auth::user()->is_professor())
+    <div class="modal fade rkm-model" id="new_cours" tabindex="-1" role="dialog" aria-labelledby="dp-modalLabel" aria-hidden="true">
+        <div class="modal-dialog rkm-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header border-0 right-corner">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container h-100">
+                        <div class="row justify-content-md-center h-100 align-items-center">
+                            <form class="col-sm-12 col-md-8 col-lg-6" method="POST" enctype="multipart/form-data" action="{{ route('discussions') }}">
+                                @csrf
+                                <h2 class="mb-5 text-center text-black">New cours</h2>
+                                <div class="form-group my-3">
+                                    <label for="title" class="rkm-control-label">Title</label>
+                                    <input id="title" type="text" name="title" maxlength="125" class="rkm-form-control @error('title') is-invalid @enderror" value="{{ old('title') }}" placeholder="Enter Title" required />
+                                    @error('title')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="form-group my-3">
+                                    <label for="short_title" class="rkm-control-label">Short Title</label>
+                                    <input id="short_title" type="text" name="short_title" maxlength="125" class="rkm-form-control @error('short_title') is-invalid @enderror" value="{{ old('short_title') }}" placeholder="Enter Short Title" required />
+                                    @error('short_title')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="form-group my-3">
+                                    <label for="description" class="rkm-control-label">Description</label>
+                                    <textarea id="description" class="rkm-form-control @error('description') is-invalid @enderror" name="description" rows="4" placeholder="Enter Description" required>{{ old('description') }}</textarea>
+                                    @error('description')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <input type="hidden" name="class_id" value="{{ $class->id }}" />
+                                <div class="form-groupe mt-4">
+                                    <button type="submit" class="rb-primary rbl w-100">Create</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="title" class="col-form-label">Short title:</label>
-                        <input type="text" name="short_title" class="form-control" id="title" maxlength="10">
-                    </div>
-                    <div class="form-group">
-                        <label for="description" class="col-form-label">Description:</label>
-                        <textarea class="form-control" name="description" id="description"></textarea>
-                    </div>
-                    <input type="hidden" name="class_id" value="{{ $class->id }}" />
-                </form>
+                </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <button type="submit" form="new_cours_form" class="btn btn-primary">Create</button>
-            </div>
-          </div>
         </div>
     </div>
+    @endif
 </section>
 @endsection

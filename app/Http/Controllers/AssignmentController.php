@@ -19,7 +19,7 @@ class AssignmentController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        //$this->middleware('pending');
+        $this->middleware('not-pending');
     }
 
     /**
@@ -82,7 +82,7 @@ class AssignmentController extends Controller
      */
     public function show(Assignment $assignment)
     {
-        return view('assignment.show', ['assignment' => $assignment, 'user' => Auth::id()]);
+        return view('assignment.show', ['assignment' => $assignment, 'user' => Auth::id(), 'class' => $assignment->course->classe]);
     }
 
     /**

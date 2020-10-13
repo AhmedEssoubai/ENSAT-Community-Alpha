@@ -19,7 +19,7 @@ class ResourceController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        //$this->middleware('pending');
+        $this->middleware('not-pending');
     }
 
     /**
@@ -83,7 +83,7 @@ class ResourceController extends Controller
      */
     public function show(Resource $resource)
     {
-        return view('resource.show', ['resource' => $resource, 'user' => Auth::id()]);
+        return view('resource.show', ['resource' => $resource, 'user' => Auth::id(), 'class' => $resource->course->classe]);
     }
 
     /**

@@ -39,8 +39,8 @@
                                 <div class="d-flex align-items-center dropdown">
                                     <span class="text-mgray icon-hidden" id="assignment_{{ $assignment->id }}_options" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-ellipsis-h"></i></span>
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="assignment_{{ $assignment->id }}_options">
-                                        <a class="dropdown-item" href="#">Éditer</a>
-                                        <button type="button" class="dropdown-item" data-toggle="modal" data-target="#delete_post" data-id="{{ $assignment->id }}">Supprimer</a>
+                                        {{--<a class="dropdown-item" href="#">Éditer</a>--}}
+                                        <button type="button" class="dropdown-item" data-toggle="modal" data-target="#delete_post" data-id="{{ $assignment->id }}">Delete</a>
                                     </div>
                                 </div>
                             </div>
@@ -95,22 +95,15 @@
                 <h6 class="text-dark mx-3 mb-3">Class students</h6>
                 <div class="container">
                     <div class="row mx-1">
-                        <div class="col-2 my-1 px-1" title="Consectetur Adipisicing">
-                            <img src="img/avatar-0.png" class="img-fluid rounded-circle"/>
-                        </div>
-                        <div class="col-2 my-1 px-1" title="Possimus Cupiditate">
-                            <img src="img/avatar-1.jpeg" class="img-fluid rounded-circle"/>
-                        </div>
-                        <div class="col-2 my-1 px-1" title="Dolor Sit">
-                            <img src="img/avatar-2.jpg" class="img-fluid rounded-circle"/>
-                        </div>
-                        <div class="col-2 my-1 px-1" title="Dolor Sit">
-                            <img src="img/avatar-2.jpg" class="img-fluid rounded-circle"/>
-                        </div>
+                        @foreach ($class->students as $student)
+                            <div class="col-2 my-1 px-1">
+                                <img class="img-fluid rounded-circle" src="{{ $student->user->image }}" alt="student_img" title="{{ $student->user->firstname }} {{ $student->user->lastname }}">
+                            </div>
+                        @endforeach
                     </div>
                 </div>
                 <div class="text-center mt-3">
-                    <a href="#" class="_link px-3"><small>Show all</small></a>
+                    <a href="/classes/{{ $class->id }}/members" class="_link px-3"><small>Show all</small></a>
                 </div>
             </div>
         </div>
@@ -148,11 +141,12 @@
                                 <form class="col-sm-12 col-md-8 col-lg-6" method="POST" enctype="multipart/form-data" action="{{ route('assignments') }}">
                                     @csrf
                                     <div class="mb-5 d-flex justify-content-between align-items-center">
-                                        <h2 class="text-center">New assignment</h2>
+                                        <h2 class="text-center text-black">New assignment</h2>
                                         <button type="submit" class="rb-primary rbl">Publish</button>
                                     </div>
                                     <div class="form-group my-3">
-                                        <input type="text" name="title" maxlength="125" class="rkm-form-control my-2 @error('title') is-invalid @enderror" value="{{ old('title') }}" placeholder="Title" required />
+                                        <label for="title" class="rkm-control-label">Title</label>
+                                        <input id="title" type="text" name="title" maxlength="125" class="rkm-form-control @error('title') is-invalid @enderror" value="{{ old('title') }}" placeholder="Title" required />
                                         @error('title')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -160,7 +154,8 @@
                                         @enderror
                                     </div>
                                     <div class="form-group my-3">
-                                        <textarea class="rkm-form-control @error('objectif') is-invalid @enderror" name="objectif" rows="4" placeholder="Objectif" required>{{ old('objectif') }}</textarea>
+                                        <label for="objectif" class="rkm-control-label">Objectif</label>
+                                        <textarea id="objectif" class="rkm-form-control @error('objectif') is-invalid @enderror" name="objectif" rows="4" placeholder="Enter Objectif" required>{{ old('objectif') }}</textarea>
                                         @error('objectif')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -168,6 +163,7 @@
                                         @enderror
                                     </div>
                                     <div class="form-group my-3">
+                                        <label for="course" class="rkm-control-label">Course</label>
                                         <select id="course" name="course" class="custom-select rkm-form-control @error('course') is-invalid @enderror" required>
                                             <option disabled @empty(old('course')) selected @endif value>-- Select assignment course --</option>
                                             @foreach ($prof_courses as $course)
@@ -182,7 +178,8 @@
                                     </div>
                                     <div class="form-row align-items-center">
                                         <div class="col-7 my-3">
-                                            <input type="datetime-local" name="deadline" class="rkm-form-control my-2 @error('deadline') is-invalid @enderror" value="{{ old('deadline') }}" placeholder="Deadline" required />
+                                            <label for="deadline" class="rkm-control-label">Deadline</label>
+                                            <input id="deadline" type="datetime-local" name="deadline" class="rkm-form-control @error('deadline') is-invalid @enderror" value="{{ old('deadline') }}" placeholder="Deadline" required />
                                             @error('deadline')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -190,6 +187,7 @@
                                             @enderror
                                         </div>
                                         <div class="col-5 my-3">
+                                            <label for="assigned_type" class="rkm-control-label">Target</label>
                                             <select id="assigned_type" name="assigned_type" class="custom-select rkm-form-control @error('assigned_type') is-invalid @enderror" required>
                                                 <option @if(old('assigned_type') == '0') selected @endif value="0">Individuals</option>
                                                 <option @if(old('assigned_type') == '1') selected @endif value="1">Groups</option>
@@ -202,6 +200,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group my-3" style="border-bottom: 1px solid rgba(114, 114, 114, 0.5)">
+                                        <label for="assigned-btn" class="rkm-control-label">Target</label>
                                         <button id="assigned-btn" type="button" class="btn-free w-100 text-left text-dgray lead mb-2">
                                             All students
                                         </button>

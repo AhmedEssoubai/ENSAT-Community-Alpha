@@ -1,23 +1,14 @@
 #welcome{
     position: relative;
-    background: linear-gradient(to bottom, rgba(30, 113, 168, 0.8) 0%, rgba(15, 11, 87, 0.8) 100%), url("../img/bg.jpg");
+    /*background: linear-gradient(to bottom, rgba(30, 113, 168, 0.8) 0%, rgba(15, 11, 87, 0.8) 100%), url("../img/bg.jpg");*/
+    /*
+        #328bf2
+        #1644ad
+    */
+    background-image: linear-gradient(131deg,rgba(50, 139, 242, 0.8) 1%,rgba(22, 68, 173, 0.8) 67%), url("../img/bg.jpg");
     background-size: cover;
     /*min-height: 600px;*/
     min-height: 100vh;
-}
-
-#welcome .btn-primary{
-    min-width: 250px;
-}
-
-#welcome .btn-primary{
-    background-color: #F32A48 !important;
-    border-color: #F32A48 !important;
-}
-
-#welcome .btn-primary:hover{
-    background-color: #eb566c !important;
-    border-color: #eb566c !important;
 }
 
 .btn-outline-secondary:hover{
@@ -32,4 +23,17 @@
 
 #properties .card-text{
     opacity: 0.4;
+}
+
+#properties .card .card-icon{
+    height: 105px;
+    width: 105px;
+    margin: 0 auto 20px auto;
+    background-color: #328AF1;
+    border-radius: 50%;
+    font-size: 3em;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

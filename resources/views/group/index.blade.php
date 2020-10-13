@@ -10,9 +10,11 @@
                     There are {{ $class->groups->count() }} group
                 </p>
             </div>
-            <h6 class="">
+            @if (Auth::user()->is_professor())
+            <h6>
                 <button class="rb-primary rbl" data-toggle="modal" data-target="#new_group">NEW Group</button>
             </h6>
+            @endif
         </div>
         <div class="row mb-5">
             @foreach ($class->groups as $group)
@@ -51,6 +53,7 @@
         </div>
     </div>
     
+    @if (Auth::user()->is_professor())
     <div class="modal fade rkm-model" id="new_group" tabindex="-1" role="dialog" aria-labelledby="dp-modalLabel" aria-hidden="true">
         <div class="modal-dialog rkm-dialog" role="document">
             <div class="modal-content">
@@ -96,6 +99,7 @@
             </div>
         </div>
     </div>
+    @endif
 </section>
 @endsection
 

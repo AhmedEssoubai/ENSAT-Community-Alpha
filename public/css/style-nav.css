@@ -94,3 +94,25 @@
 .nav-top-list .nav-item.active .indicator, .nav-top-list .nav-item.active .nav-link{
     opacity: 1 !important;
 }
+.navbar-btn{
+    padding: 0.375rem 0.75rem;
+    color: white;
+}
+.navbar-btn{
+    padding: 0.375rem 1rem;
+    color: white;
+}
+.btn-p{
+    border-radius: 20px;
+    border: 1px solid white;
+    transition: background-color .35s ease-in-out;
+    transition: color .15s ease-in-out;
+}
+.navbar-btn:hover{
+    color: white;
+}
+.btn-p:hover{
+    background-color: white;
+    color: rgb(22, 68, 173);
+    text-decoration: none;
+}

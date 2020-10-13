@@ -18,7 +18,7 @@ class ClassController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        //$this->middleware('pending');
+        $this->middleware('not-pending');
     }
 
     /**
@@ -27,7 +27,11 @@ class ClassController extends Controller
      */
     public function index()
     {
-        return view('class.index', ['classes' => Classe::get(), 'professors' => Professor::get()]);
+        $my_classes = Auth::user()->profile->classes;
+        $my_classes = Auth::user()->profile->managed_classes;
+        $classes = Classe::withCount(['students', 'resources', 'assignments'])->get();
+        $my_classes = $classes->intersect($my_classes);
+        return view('class.index', ['my_classes' => $my_classes, 'all_classes' => $classes, 'professors' => Professor::get()]);
     }
 
     /**
@@ -88,6 +92,11 @@ class ClassController extends Controller
      */
     public function add_professors()
     {
-        return response("Hi", 200);
+        $data = request()->validate([
+            'class' => 'required',
+            'professors' => ['required', 'array']
+        ]);
+        Classe::find($data['class'])->attach($data['professors']);
+        return redirect()->back();
     }
 }

@@ -33,7 +33,7 @@
                                 <div class="d-flex ml-2 align-items-center dropdown">
                                     <small class="text-mgray icon-hidden" id="resource_options" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-ellipsis-h"></i></small>
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="resource_options">
-                                        <a class="dropdown-item" href="/resources/{{ $resource->id }}/edit">Edit</a>
+                                        {{--<a class="dropdown-item" href="/resources/{{ $resource->id }}/edit">Edit</a>--}}
                                         <button type="button" class="dropdown-item" data-toggle="modal" data-target="#delete_resource">Delete</a>
                                     </div>
                                 </div>

@@ -46,7 +46,7 @@
                                 <div class="d-flex ml-2 align-items-center dropdown">
                                     <small class="text-mgray icon-hidden" id="discussion_options" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-ellipsis-h"></i></small>
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="discussion_options">
-                                        <a class="dropdown-item" href="/discussions/{{ $discussion->id }}/editer">Edit</a>
+                                        {{--<a class="dropdown-item" href="/discussions/{{ $discussion->id }}/editer">Edit</a>--}}
                                         <button type="button" class="dropdown-item" data-toggle="modal" data-target="#delete_discussion">Delete</a>
                                     </div>
                                 </div>

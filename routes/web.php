@@ -15,21 +15,24 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->middleware('guest');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/pending', function () {
+    return view('pending');
+})->name('pending')->middleware('pending');
 
 // Classes
-Route::get('/classes', 'ClassController@index')->name('classes.index');
+Route::get('/classes', 'ClassController@index')->name('classes')->middleware('professor');
 //Route::get('/classes/create', 'ClassController@create')->name('classes.create');
 Route::get('/classes/{class}/members', 'ClassController@members')->name('classes.members');
-Route::post('/classes', 'ClassController@store')->name('classes');
+Route::post('/classes', 'ClassController@store')->name('classes')->middleware('admin');
 // Professors
 Route::get('/search/professors/{value}', 'ProfessorController@search')->name('search.professors');
-Route::post('/members', 'ClassController@add_professors')->name('add.professors');
-Route::get('/professors', 'ProfessorController@index')->name('professors');
+Route::post('/members', 'ClassController@add_professors')->name('add.professors')->middleware('professor');
+Route::get('/professors', 'ProfessorController@index')->name('professors')->middleware('professor');
 // Students
 Route::get('/search/students/{value}', 'StudentController@search')->name('search.students');
 // Discussions
@@ -72,3 +75,8 @@ Route::get('/comments/{comment}/update', 'CommentsController@update')->name('com
 Route::get('/comments/d/{comment}', 'CommentsController@destroy')->name('comments.destroy');
 //Bookmark
 Route::get('/bookmarks/{user}', 'BookmarksController@show')->name('bookmarks.show');
+//Admin
+Route::get('/admin/professors', 'AdminController@professors')->name('admin.professors')->middleware('admin');
+Route::get('/admin/students', 'AdminController@students')->name('admin.students')->middleware('admin');
+Route::get('/admin/user/accept/{user}', 'AdminController@accept_user')->name('admin.users.accept')->middleware('admin');
+Route::get('/users/d/{user}', 'AdminController@destroy_user')->name('admin.users.destroy');

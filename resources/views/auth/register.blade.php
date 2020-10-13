@@ -1,117 +1,107 @@
 @extends('layouts.app')
 
 @section('content')
-<div>
-    <section id="login">
-        <div id="login_c" class="container px-0">
-            <div class="row mx-0">
-                <div id="forme" class="col-md-6 offset-sm-6 p-5">
-                    <form method="POST" action="{{ route('register') }}">
-                        @csrf
+<section class="container px-0">
+    <div class="row mx-0 py-4">
+        <div class="col-md-8 offset-md-2 col-lg-6 offset-lg-3 p-5">
+            <form method="POST" action="{{ route('register') }}">
+                @csrf
 
-                        <h2 class="pt-5 pb-3">
-                            {{ __('Register') }}
-                        </h2>
+                <h1 class="pt-5 pb-3 text-center">
+                    {{ __('Register') }}
+                </h1>
 
-                        <h4 class="mb-5">
-                            <button id="btn-std" type="button" onclick="account_type(0)">Student</button>
-                            /
-                            <button id="btn-prf" type="button" onclick="account_type(1)">Professor</button>
-                        </h4>
-
-                        <input id="atype" type="hidden" name="atype" value="{{ old('atype', '0') }}" />
-                        <div id="std-inputs">
-                            <div class="form-group my-3">
-                                <label for="class">Class :</label>
-                                <select id="class" name="class" class="form-control @error('class') is-invalid @enderror">
-                                    <option @if(old('class') == '1') selected @endif value="1">MBISD1</option>
-                                    <option @if(old('class') == '2') selected @endif value="2">MBISD2</option>
-                                    <option @if(old('class') == '3') selected @endif value="3">MSCEE1</option>
-                                    <option @if(old('class') == '4') selected @endif value="4">MSCEE2</option>
-                                    <option @if(old('class') == '5') selected @endif value="5">MCSC1</option>
-                                    <option @if(old('class') == '6') selected @endif value="6">MCSC2</option>
-                                    <option @if(old('class') == '7') selected @endif value="7">MPSI1</option>
-                                    <option @if(old('class') == '8') selected @endif value="8">MPSI2</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div id="prf-inputs">
-                        </div>
-                        <div class="form-groupe my-3">
-                            <label class="control-label" for="cin">CIN : </label>
-                            <input id="cin" name="cin" type="text" class="form-control @error('cin') is-invalid @enderror" placeholder="Entrez votre CIN" value="{{ old('cin') }}" required autocomplete="cin" />
-
-                            @error('cin')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                        <div class="form-groupe my-3">
-                            <label class="control-label" for="lastname">Last name : </label>
-                            <input id="nom" name="lastname" type="text" class="form-control @error('lastname') is-invalid @enderror" placeholder="Entrez votre nom" value="{{ old('lastname') }}" required autocomplete="lastname" autofocus />
-
-                            @error('lastname')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                        <div class="form-groupe my-3">
-                            <label class="control-label" for="firstname">First name :</label>
-                            <input id="firstname" name="firstname" type="text" class="form-control @error('firstname') is-invalid @enderror" placeholder="Entrez votre prénom" value="{{ old('firstname') }}" required autocomplete="firstname" />
-
-                            @error('firstname')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                        <div class="form-groupe my-3">
-                            <label class="control-label" for="email">{{ __('E-Mail Address') }} :</label>
-                            <input id="email" name="email" type="text" class="form-control @error('email') is-invalid @enderror" placeholder="Entrez vote email" value="{{ old('email') }}" required autocomplete="email" />
-
-                            @error('email')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                        <div class="form-group  my-3">
-                            <label for="password">{{ __('Password') }} :</label>
-                            <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" id="password" placeholder="Tapez votre mot de passe" required autocomplete="password" />
-
-                            @error('password')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                        <div class="form-group  my-3">
-                            <label for="password_confirmation">{{ __('Confirm Password') }} :</label>
-                            <input id="password_confirmation" type="password" name="password_confirmation" class="form-control @error('password_confirmation') is-invalid @enderror" placeholder="Veuillez confimer votre mot de passe" required autocomplete="password_confirmation" />
-                        </div>
-                        <div class="form-groupe mt-5">
-                            <button type="submit" class="btn btn-primary btn-lg form-control">{{ __('Register') }}</button>
-                        </div>
-                    </form>
+                <div class="toggle-options mb-5 mx-auto">
+                    <button id="btn-std" type="button" onclick="account_type(0)" class="toggle-option active">Student</button>
+                    <button id="btn-prf" type="button" onclick="account_type(1)" class="toggle-option">Professor</button>
                 </div>
-            </div>
-        </div>
-    </section>
 
-    <section class="py-5 bg-light">
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <h5 class="text-secondary">
-                        Si vous possédez déjà un compte. <a href="{{ route('login') }}" class="_link">Se connecter</a>
-                    </h5>
+                <input id="atype" type="hidden" name="atype" value="{{ old('atype', '0') }}" />
+                <div id="std-inputs">
+                    <div class="form-group my-3">
+                        <label for="class" class="rkm-control-label">Class</label>
+                        {{--<select id="class" name="class" class="custom-select rkm-form-control @error('class') is-invalid @enderror">
+                            <option disabled selected value>-- Select class --</option>
+                            <option @if(old('class') == '1') selected @endif value="1">MBISD1</option>
+                            <option @if(old('class') == '2') selected @endif value="2">MBISD2</option>
+                            <option @if(old('class') == '3') selected @endif value="3">MSCEE1</option>
+                            <option @if(old('class') == '4') selected @endif value="4">MSCEE2</option>
+                            <option @if(old('class') == '5') selected @endif value="5">MCSC1</option>
+                            <option @if(old('class') == '6') selected @endif value="6">MCSC2</option>
+                            <option @if(old('class') == '7') selected @endif value="7">MPSI1</option>
+                            <option @if(old('class') == '8') selected @endif value="8">MPSI2</option>
+                        </select>--}}
+                        <select id="class" name="class" class="custom-select rkm-form-control @error('class') is-invalid @enderror">
+                            <option disabled selected value>-- Select class --</option>
+                            @foreach ($classes as $c)
+                                <option @if(old('class') == '{{$c->id}}') selected @endif value="{{$c->id}}">{{$c->label}}</option>
+                            @endforeach
+                        </select>
+                    </div>
                 </div>
-            </div>
+                <div id="prf-inputs">
+                </div>
+                <div class="form-groupe my-3">
+                    <label class="rkm-control-label" for="cin">CIN</label>
+                    <input id="cin" name="cin" type="text" class="rkm-form-control @error('cin') is-invalid @enderror" placeholder="Enter CIN" value="{{ old('cin') }}" required autocomplete="cin" />
+
+                    @error('cin')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <div class="form-groupe my-3">
+                    <label class="rkm-control-label" for="firstname">First Name</label>
+                    <input id="firstname" name="firstname" type="text" class="rkm-form-control @error('firstname') is-invalid @enderror" placeholder="Enter First Name" value="{{ old('firstname') }}" required autocomplete="firstname" />
+
+                    @error('firstname')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <div class="form-groupe my-3">
+                    <label class="rkm-control-label" for="lastname">Last Name</label>
+                    <input id="nom" name="lastname" type="text" class="rkm-form-control @error('lastname') is-invalid @enderror" placeholder="Enter Last Name" value="{{ old('lastname') }}" required autocomplete="lastname" autofocus />
+
+                    @error('lastname')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <div class="form-groupe my-3">
+                    <label class="rkm-control-label" for="email">{{ __('E-Mail Address') }}</label>
+                    <input id="email" name="email" type="text" class="rkm-form-control @error('email') is-invalid @enderror" placeholder="Enter Email" value="{{ old('email') }}" required autocomplete="email" />
+
+                    @error('email')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <div class="form-group  my-3">
+                    <label class="rkm-control-label" for="password">{{ __('Password') }}</label>
+                    <input type="password" name="password" class="rkm-form-control @error('password') is-invalid @enderror" id="password" placeholder="Enter Passwwrd" required autocomplete="password" />
+
+                    @error('password')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <div class="form-group  my-3">
+                    <label class="rkm-control-label" for="password_confirmation">{{ __('Confirm Password') }}</label>
+                    <input id="password_confirmation" type="password" name="password_confirmation" class="rkm-form-control @error('password_confirmation') is-invalid @enderror" placeholder="Conform Password" required autocomplete="password_confirmation" />
+                </div>
+                <div class="form-groupe mt-5">
+                    <button type="submit" class="rb-primary rbl w-100 mb-3">{{ __('Register') }}</button>
+                </div>
+            </form>
         </div>
-    </section>
-</div>
+    </div>
+</section>
 <script type="text/javascript">
     var type = 0;
 
@@ -123,19 +113,15 @@
         {
             document.getElementById("prf-inputs").classList.remove("d-none");
             document.getElementById("std-inputs").classList.add("d-none");
-            document.getElementById("btn-prf").classList.remove("btn-link");
-            document.getElementById("btn-std").classList.remove("btn-link-na");
-            document.getElementById("btn-std").classList.add("btn-link");
-            document.getElementById("btn-prf").classList.add("btn-link-na");
+            document.getElementById("btn-std").classList.remove("active");
+            document.getElementById("btn-prf").classList.add("active");
         }
         else
         {
             document.getElementById("std-inputs").classList.remove("d-none");
             document.getElementById("prf-inputs").classList.add("d-none");
-            document.getElementById("btn-std").classList.remove("btn-link");
-            document.getElementById("btn-prf").classList.remove("btn-link-na");
-            document.getElementById("btn-prf").classList.add("btn-link");
-            document.getElementById("btn-std").classList.add("btn-link-na");
+            document.getElementById("btn-prf").classList.remove("active");
+            document.getElementById("btn-std").classList.add("active");
         }
 
     }

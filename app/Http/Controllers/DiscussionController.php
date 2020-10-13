@@ -18,7 +18,7 @@ class DiscussionController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        //$this->middleware('pending');
+        $this->middleware('not-pending');
     }
 
     /**
@@ -74,7 +74,7 @@ class DiscussionController extends Controller
      */
     public function show($discussion)
     {
-        return view('discussion.show', ['discussion' => Discussion::findOrFail($discussion), 'user' => Auth::id()]);
+        return view('discussion.show', ['discussion' => Discussion::findOrFail($discussion), 'user' => Auth::id(), 'class' => $discussion->course->classe]);
     }
 
     /**

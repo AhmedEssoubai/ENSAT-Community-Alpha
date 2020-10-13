@@ -9,12 +9,12 @@
                     <h1 class="display-2 mt-5 mb-5 pt-5">
                         <strong>KEEP GOING</strong>
                     </h1>
-                    <p style="font-size: 1.6em;" class="lead">
+                    <p style="font-size: 1.5em; color: rgba(255, 255, 255, 0.7)" class="lead">
                         Do not take life too seriously. You will never get out of it alive.
                     </p>
                     <div class="mt-5">
-                        <a href="register.html" class="btn btn-primary btn-lg text-white">
-                            S'inscrire
+                        <a href="{{ route('register') }}" class="rb-white">
+                            Get started now
                         </a>
                     </div>
                 </div>
@@ -23,57 +23,38 @@
     </section>
     <section id="properties" class="py-5 text-center bg-white">
         <div class="container">
-            <div class="row text-left">
-                <div class="col-xs-12 col-md-6 col-lg-3">
+            <div class="row text-center">
+                <div class="col-xs-12 col-md-6 col-lg-4">
                     <div class="card">
-                        <img class="card-img-top w-50 m-auto" src="img/prop-0.png" alt="Card image cap">
+                        <div class="card-icon">
+                            <i class="fas fa-share"></i>
+                        </div>
                         <div class="card-body">
-                            <h5 class="card-title">Partagez facilement avec qui vous voulez</h5>
-                            <p class="card-text">le partage en utilisant Bisd Community, c'est simple et rapide.Un simple lien vous permet de partager toutes sortes de fichiers (photo, vidéo, dossier compressé, etc.) avec qui vous voulez</p>
+                            <h5 class="card-title">Share it easily</h5>
+                            <p class="card-text">Using ENSAT Community offers the opportunity to share course, exercice, exam with the community(your students, teacher or everyone) fast, simple and easy.                            </p>
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-12 col-md-6 col-lg-3">
+                <div class="col-xs-12 col-md-6 col-lg-4">
                     <div class="card">
-                        <img class="card-img-top w-50 m-auto" src="img/prop-1.png" alt="Card image cap">
+                        <div class="card-icon">
+                            <i class="fas fa-sitemap"></i>
+                        </div>
                         <div class="card-body">
-                            <h5 class="card-title">Gérez vos groupes.</h5>
-                            <p class="card-text">avec Bisd Community, vous pouvez facilement importer des fichiers et partager des documents avec les personnes concernées, en créant un groupe, en ajoutant une liste de membres et en invitant ces derniers à accéder à un dossier partagé.</p>
+                            <h5 class="card-title">Manage it now</h5>
+                            <p class="card-text">Using ENSAT Community helps you to manage your students, their notes, documents and sessions.</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-12 col-md-6 col-lg-3">
+                <div class="col-xs-12 col-md-6 col-lg-4">
                     <div class="card">
-                        <img class="card-img-top w-50 m-auto" src="img/prop-2.png" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">Recevez des notifications</h5>
-                            <p class="card-text">Soyez averti au moment précis où un utilisateur commenter à votre publication ou a partager dans votre groupe.</p>
+                        <div class="card-icon">
+                            <i class="far fa-eye"></i>
                         </div>
-                    </div>
-                </div>
-                <div class="col-xs-12 col-md-6 col-lg-3">
-                    <div class="card">
-                        <img class="card-img-top w-50 m-auto" src="img/prop-3.png" alt="Card image cap">
                         <div class="card-body">
-                            <h5 class="card-title">Etudier avec les autres</h5>
-                            <p class="card-text">posez des questions, partagez des cours,exercices... et partagez des connaissences avec les autres</p>
+                            <h5 class="card-title">Stream it or watch it</h5>
+                            <p class="card-text">Teachers are able to stream their own lives and watch them as well as students, and there is also an opportunity to contribute with each other (Chat room, whiteboard)</p>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="py-5 text-center bg-faded">
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <div class="mb-5">
-                        <h1 class="text-primary pb-3">
-                            ENSAT Community
-                        </h1>
-                        <p class="lead pb-3">
-                            ENSAT Community est un site de partage pour les étudiants afin de partager des cours, des exercices, poser des questions ; pour partager les connaissences.
-                        </p>
                     </div>
                 </div>
             </div>

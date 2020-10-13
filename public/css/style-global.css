@@ -1,3 +1,6 @@
+body{
+    font-family: 'PT Sans', sans-serif !important;
+}
 .text-primary{
     color: #e14a41 !important;
 }
@@ -84,11 +87,18 @@
     background-color: rgba(247, 248, 250, 1);
 }
 
+/* - - - LINES - - - */
+/* Normal line*/
 .line {
     height: 1px;
     background-color: rgba(50, 50, 55, 0.3);
     /*border-bottom: 1px solid rgba(50, 50, 55, 0.6)*/
     box-shadow: 0 1px 5px rgba(50, 50, 55, 0.2);
+}
+/* RKM line */
+.rkm-line{
+    height: 1px;
+    background: linear-gradient(to right, rgba(183, 195, 201, 0) 15%, rgba(183, 195, 201, 0.4) 35%, rgba(183, 195, 201, 0.4) 65%, rgba(183, 195, 201, 0) 85%);
 }
 
 .errorMessage {
@@ -138,19 +148,21 @@
 
 .icon-g{
     cursor: pointer;
-    color: rgba(74, 217, 145, 0.5) !important;
-    font-size: 1.2em;
+    color: rgb(110, 220, 196, 0.7) !important;
+    font-size: 1.6em;
+    transition: color .15s ease-in-out;
 }
 .icon-g:hover{
-    color: rgba(74, 217, 145, 1) !important;
+    color: #1AAB8B !important;
 }
 .icon-r{
     cursor: pointer;
-    color: rgba(255, 101, 101, 0.5) !important;
-    font-size: 1.2em;
+    color: rgb(244, 72, 129, 0.7) !important;
+    font-size: 1.6em;
+    transition: color .15s ease-in-out;
 }
 .icon-r:hover{
-    color: rgba(255, 101, 101, 1) !important;
+    color: #EC454F !important;
 }
 .btn-od{
     color: rgba(255, 101, 101, 1) !important;
@@ -316,7 +328,7 @@
     border-color: #b7c3c9 !important;
     text-decoration: none;
 }
-/* Rounded button out */
+/* Rounded button */
 .rb-primary{
     color: white !important;
     font-size: 0.75em;
@@ -332,6 +344,23 @@
 .rb-primary:hover{
     background-color: #2779bd !important;
     text-decoration: none;
+}
+/* Rounded button */
+.rb-white{
+    background-color: white;
+    color: rgb(34, 41, 47) !important;
+    font-size: 0.75rem;
+    border-radius: 18px;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 0.83rem 2rem;
+    cursor: pointer;
+    transition: color .15s ease-in-out;
+    font-weight: 700;
+}
+.rb-white:hover{
+    color: #328AF1 !important;
+    text-decoration: white;
 }
 /* Large rounded button */
 .rbl{
@@ -413,6 +442,12 @@ select.rkm-form-control:focus{
 .rkm-form-control::-ms-input-placeholder { /* Microsoft Edge */
     color: #606f7b;
 }
+/* Label */
+.rkm-control-label {
+    font-weight: 700;
+    font-size: .63rem;
+    color: #8795a1;
+}
 /* Box sizing */
 .bz-border{
     box-sizing: border-box !important;
@@ -464,6 +499,14 @@ select.rkm-form-control:focus{
 }
 .link-dark:hover{
     color: #606f7b !important;
+}
+
+.link_white{
+    color: white !important;
+}
+.link_white:hover{
+    color: rgb(255, 255, 255, 0.8) !important;
+    text-decoration: none;
 }
 /* BOXS */
 .rounded-box{
@@ -631,10 +674,56 @@ select.rkm-form-control:focus{
     box-shadow: rgba(36, 37, 38, 0.04) 4px 4px 15px 0px;
     border-radius: 0 0 10px 10px;
 }
+.rkm-select-title{
+    color: white;
+    background-color: transparent !important;
+    outline: none;
+    border: 0;
+    font-size: 1.3em;
+}
+/* Toggle Options */
+.toggle-options{
+    display: flex;
+    width: 225px;
+    background: url(https://laracasts.com//images/plans/plans-toggle-border.svg);
+    width: 221px;
+    height: 40px;
+    /*border: 1px solid #637BFF;
+    border-radius: 18px;*/
+}
+.toggle-option{
+    color: rgb(34, 41, 47);
+    border-radius: 18px;
+    width: 50%;
+    font-size: .75rem;
+    font-weight: 700;
+    vertical-align: baseline;
+    text-transform: uppercase;
+    padding: 0.8em 0 0.8em 0;
+    border: 0;
+    background-color: transparent;
+}
+.toggle-option:hover{
+    border: 0;
+    outline: 0;
+}
+.toggle-option.active{
+    color: white;
+    background-image: linear-gradient(125deg,#21c8f6,#637bff);
+}
+
 /* Text */
 .text-up{
     text-transform: uppercase;
 }
 .text-bold{
     font-weight: bold;
+}
+
+/* Dropdown */
+.nav-item .dropdown-menu{
+    margin-top: 0.7rem !important;
+}
+.dropdown-item.active, .dropdown-item:active{
+    background-color: rgb(22, 68, 173);
 }
